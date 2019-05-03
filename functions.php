@@ -80,3 +80,10 @@ function minifolio_sidebars(){
     )
   );
 }
+
+register_nav_menus(
+  array(
+    'primary' => 'Main Menu',
+    'social' => 'Social Media'
+  )
+);
