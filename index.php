@@ -11,12 +11,7 @@
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Minifolio - Bootstrap Responsive Resume, Personal Portfolio Template</title>
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<link rel="stylesheet" href="css/jquery.fancybox.css">
-<link rel="stylesheet" href="css/main.css">
-<link rel="stylesheet" href="css/responsive.css">
-<link rel="stylesheet" href="css/animate.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<?php wp_head() ?>
 </head>
 
 <body>
@@ -40,10 +35,13 @@
   <div class="container">
     <div class="col-md-10 col-md-offset-1">
       <div class="banner-text text-center">
-        <h1>Hey, I’m John</h1>
-        <p>Looking for a strategist and experienced designer,<br>
-          Scroll to see my work.</p>
-        <!-- banner text --> 
+        <?php
+          if(is_active_sidebar( 'banner' )){
+            dynamic_sidebar( 'banner' );
+          }
+        ?>  
+
+      <!-- banner text --> 
       </div>
     </div>
   </div>
@@ -52,12 +50,21 @@
 <!-- description text section -->
 <section id="aboutme" class="section descripton">
   <div class="container">
-    <div class="col-md-10 col-md-offset-1 text-center"> <img src="images/designer-pic.jpg" alt="Mafolio">
-      <h1>Johnathan Doe</h1>
-      <p>UX Designer/ Developer</p>
+    <div class="col-md-10 col-md-offset-1 text-center"> 
+      
+    <?php
+      if(is_active_sidebar( 'about-me' )){
+        dynamic_sidebar( 'about-me' );
+      }
+    ?>
+        
     </div>
     <div class="col-md-10 col-md-offset-1 space">
-      <p>Donec sed odio dui. Nulla vitae elit libero, a pharetra augue. Nullam id dolor id nibh ultricies vehicula ut id elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur purus sit amet avida at eget metus.Donec sed odio dui. Nulla vitae elit libero, a pharetra augue. Nullam id dolor id nibh ultricies vehicula ut id elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur purus sit amet avida at eget metus.</p>
+    <?php
+      if(is_active_sidebar( 'about-me2' )){
+        dynamic_sidebar( 'about-me2' );
+      }
+    ?>
     </div>
   </div>
 </section>
@@ -146,33 +153,26 @@
 <section id="hireme" class="section hireme">
   <div class="container">
     <div class="col-md-8 col-md-offset-2 text-center">
-      <h3>Need something specific?</h3>
-      <p>We are currently crafting new products but would love to hear from you.</p>
+    <?php
+      if(is_active_sidebar( 'hire-me' )){
+        dynamic_sidebar( 'hire-me' );
+      }
+    ?>
       <a href="#contact" class="btn btn-large">Hire me</a> </div>
   </div>
 </section>
 <!-- hire me section --> 
 
-
-
 <section id="contact" class="section contact">
   <div class="container">
     <div class="col-md-10 col-md-offset-1 text-center">
-      <h3>Drop me a line</h3>
-      <p>I am honest, discreet and always focus on your goals. If you are looking for a strategist and experienced designer, just leave me a message and I'll contact you soon.</p>
-      <!--contact form start-->
-      <div class="col-md-6 col-md-offset-3 conForm">
-        <div id="message"></div>
-        <form method="post" action="php/contact.php" name="cform" id="cform">
-          <input name="name" id="name" type="text" class="col-xs-12 col-sm-12 col-md-12 col-lg-12" placeholder="Your name..." >
-          <input name="email" id="email" type="email" class=" col-xs-12 col-sm-12 col-md-12 col-lg-12 noMarr" placeholder="Email Address..." >
-          <textarea name="comments" id="comments" cols="" rows="" class="col-xs-12 col-sm-12 col-md-12 col-lg-12" placeholder="Project Details..."></textarea>
-          <input type="submit" id="submit" name="send" class="submitBnt" value="Send">
-          <div id="simple-msg"></div>
-        </form>
-      </div>
-      <!--contact form end--> 
-    </div>
+    <?php
+      if(is_active_sidebar( 'contact' )){
+        dynamic_sidebar( 'contact' );
+      }
+    ?>
+
+
   </div>
 </section>
 
@@ -192,23 +192,17 @@
           <li><a href="#"><i class="fa fa-vimeo"></i></a></li>
         </ul>
         </p>
-        <p>© 2015 All rights reserved. All Rights Reserved<br>
-          Made with <i class="fa fa-heart pulse"></i> by <a href="http://www.designstub.com/">Designstub</a><br>
-          Resesigned by <a href="#">Marcelo Vieira</a>
+        <p>© 2019 All rights reserved.<br>
+          Made with <i class="fa fa-heart pulse"></i> by <a href="http://www.spepy.io/">Spepy</a><br>
+          Redesigned by <a href="#">Mauricio Feldman-Abe</a>
         </p>
       </div>
     </div>
   </div>
 </footer>
 <!-- footer --> 
-
+<?php wp_footer(); ?>
 <!-- JS FILES --> 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> 
-<script src="js/bootstrap.min.js"></script> 
-<script src="js/jquery.fancybox.pack.js"></script> 
-<script src="js/jquery.waypoints.min.js"></script> 
-<script src="js/retina.min.js"></script> 
-<script src="js/modernizr.js"></script> 
-<script src="js/main.js"></script>
+
 </body>
 </html>
