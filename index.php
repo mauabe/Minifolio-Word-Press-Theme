@@ -19,11 +19,14 @@
 <section class="banner" role="banner">
   <header id="header"> 
     <!-- navigation section  -->
-    <div class="header-content clearfix"> <a class="logo" href="#"><img src="images/logo.png" alt="Mafolio"></a>
+    <div class="header-content clearfix">
+    <?php the_custom_logo(); ?>
+      
       <nav class="navigation" role="navigation">
-        <?php
-        wp_nav_menu( array( 'theme-location' => 'primary', 'containter' => '', 'menu_class' => 'primary-nav'));
+
+        <?php wp_nav_menu( array( 'theme_location' => 'primary', 'containter' => '', 'menu_class' => 'primary-nav' ) ); 
         ?>
+
       </nav>
       <a href="#" class="nav-toggle">Menu<span></span></a> </div>
     <!-- navigation section  --> 
@@ -45,13 +48,14 @@
   </div>
 </section>
 <!-- header section --> 
+
 <!-- description text section -->
 <section id="aboutme" class="section descripton">
   <div class="container">
     <div class="col-md-10 col-md-offset-1 text-center"> 
-      
+    
     <?php
-      if(is_active_sidebar( 'about-me' )){
+      if( is_active_sidebar( 'about-me' )){
         dynamic_sidebar( 'about-me' );
       }
     ?>
@@ -59,7 +63,7 @@
     </div>
     <div class="col-md-10 col-md-offset-1 space">
     <?php
-      if(is_active_sidebar( 'about-me2' )){
+      if( is_active_sidebar( 'about-me2' )){
         dynamic_sidebar( 'about-me2' );
       }
     ?>
@@ -67,86 +71,45 @@
   </div>
 </section>
 <!-- description text section --> 
+
 <!-- portfolio section -->
 <section id="works" class="works section no-padding">
   <div class="container-fluid">
     <div class="row no-gutter">
-      <div class="col-lg-3 col-md-6 col-sm-6 work"> <a href="images/work-1.jpg" class="work-box"> <img src="images/work-1.jpg" alt="">
-        <div class="overlay">
-          <div class="overlay-caption">
-            <h5>Project Name</h5>
-            <p>Logo Design</p>
-          </div>
-        </div>
-        <!-- overlay --> 
-        </a> </div>
-      <div class="col-lg-3 col-md-6 col-sm-6 work"> <a href="images/work-2.jpg" class="work-box"> <img src="images/work-2.jpg" alt="">
-        <div class="overlay">
-          <div class="overlay-caption">
-            <h5>Project Name</h5>
-            <p>Website Design</p>
-          </div>
-        </div>
-        <!-- overlay --> 
-        </a> </div>
-      <div class="col-lg-3 col-md-6 col-sm-6 work"> <a href="images/work-3.jpg" class="work-box"> <img src="images/work-3.jpg" alt="">
-        <div class="overlay">
-          <div class="overlay-caption">
-            <h5>Project Name</h5>
-            <p>Branding</p>
-          </div>
-        </div>
-        <!-- overlay --> 
-        </a> </div>
-      <div class="col-lg-3 col-md-6 col-sm-6 work"> <a href="images/work-4.jpg" class="work-box"> <img src="images/work-4.jpg" alt="">
-        <div class="overlay">
-          <div class="overlay-caption">
-            <h5>Project Name</h5>
-            <p>Graphic Design</p>
-          </div>
-        </div>
-        <!-- overlay --> 
-        </a> </div>
-      <div class="col-lg-3 col-md-6 col-sm-6 work"> <a href="images/work-5.jpg" class="work-box"> <img src="images/work-5.jpg" alt="">
-        <div class="overlay">
-          <div class="overlay-caption">
-            <h5>Project Name</h5>
-            <p>Website Design</p>
-          </div>
-        </div>
-        <!-- overlay --> 
-        </a> </div>
-      <div class="col-lg-3 col-md-6 col-sm-6 work"> <a href="images/work-6.jpg" class="work-box"> <img src="images/work-6.jpg" alt="">
-        <div class="overlay">
-          <div class="overlay-caption">
-            <h5>Project Name</h5>
-            <p>Logo Design</p>
-          </div>
-        </div>
-        <!-- overlay --> 
-        </a> </div>
-      <div class="col-lg-3 col-md-6 col-sm-6 work"> <a href="images/work-7.jpg" class="work-box"> <img src="images/work-7.jpg" alt="">
-        <div class="overlay">
-          <div class="overlay-caption">
-            <h5>Project Name</h5>
-            <p>Branding</p>
-          </div>
-        </div>
-        <!-- overlay --> 
-        </a> </div>
-      <div class="col-lg-3 col-md-6 col-sm-6 work"> <a href="images/work-8.jpg" class="work-box"> <img src="images/work-8.jpg" alt="">
-        <div class="overlay">
-          <div class="overlay-caption">
-            <h5>Project Name</h5>
-            <p>Website Design</p>
-          </div>
-        </div>
-        <!-- overlay --> 
-        </a> </div>
+
+      <?php 
+        $args = array(
+          'post_per_page' => 8,
+          'category__in' => array (6, 7, 8, 9),
+        );
+        $work = new WP_Query( $args );
+        if( $work->have_posts() ):
+          while( $work->have_posts() ):
+            $work->the_post();
+            ?>
+            <div class="col-lg-3 col-md-6 col-sm-6 work"> 
+              <a href="<?php the_post_thumbnail_url(); ?>" class="work-box"> <img src="<?php the_post_thumbnail_url(); ?>" alt="">
+              <div class="overlay">
+                <div class="overlay-caption">
+                  <h5><?php the_title(); ?></h5>
+                  <p><?php foreach( ( get_the_category() ) as $category ) {echo $category->cat_name; } ?></p>
+                </div>
+              </div>
+              </a> 
+            </div>
+            <?php
+          endwhile;
+          wp_reset_postdata();
+        else:
+          echo "<p>There are no posts to display at this exact moment</p>";
+        endif;
+      ?>
+
     </div>
   </div>
 </section>
 <!-- portfolio section --> 
+
 <!-- hire me section -->
 <section id="hireme" class="section hireme">
   <div class="container">
@@ -156,7 +119,7 @@
         dynamic_sidebar( 'hire-me' );
       }
     ?>
-      <a href="#contact" class="btn btn-large">Hire me</a> </div>
+      <a href="#contact" class="btn btn-large">Hire me</a> </div> 
   </div>
 </section>
 <!-- hire me section --> 
@@ -180,15 +143,11 @@
   <div class="footer-bottom">
     <div class="container">
       <div class="col-md-12">
-        <p>
+        <p><span>
           <?php
-            wp_nav_menu( array( 'theme-location' => 'social', 'containter' => '', 'menu_class' => 'footer-share'));
+            wp_nav_menu( array( 'theme_location' => 'footer-links', 'menu_class' => 'footer-share' ) );
           ?>
-
-          <?php
-          wp_nav_menu( array( 'theme-location' => 'primary', 'containter' => '', 'menu_class' => 'footer-share'));
-          ?>
-        </p>
+        </span></p>
         <p>© 2019 All rights reserved.<br>
           Made with <i class="fa fa-heart pulse"></i> by <a href="http://www.spepy.io/">Spepy Design</a><br>
           Redesigned by <a href="#">Mauricio Feldman-Abe</a>
@@ -198,8 +157,8 @@
   </div>
 </footer>
 <!-- footer --> 
+
 <?php wp_footer(); ?>
-<!-- JS FILES --> 
 
 </body>
 </html>

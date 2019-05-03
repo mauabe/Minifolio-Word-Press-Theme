@@ -26,7 +26,7 @@ add_action( 'widgets_init', 'minifolio_sidebars' );
 function minifolio_sidebars(){
   register_sidebar(
     array(
-      'name' => 'banner',
+      'name' => 'Banner',
       'id' => 'banner',
       'description' => 'Type any text here',
       'before_widget' => '<div class="widget-wrapper">',
@@ -37,7 +37,7 @@ function minifolio_sidebars(){
   );
   register_sidebar(
     array(
-      'name' => 'about me',
+      'name' => 'About me',
       'id' => 'about-me',
       'description' => 'Type any text here too',
       'before_widget' => '<div class="widget-wrapper">',
@@ -83,7 +83,10 @@ function minifolio_sidebars(){
 
 register_nav_menus(
   array(
-    'primary' => 'Main Menu',
-    'social' => 'Social Media'
+    'primary' => 'The Main Menu',
+    'footer-links' => 'The Footer Social Media',
   )
 );
+
+add_theme_support('post-thumbnails', 'html5');
+add_theme_support( 'custom-logo' );
